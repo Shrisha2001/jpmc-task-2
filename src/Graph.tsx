@@ -14,7 +14,7 @@ interface IProps {
  * Perspective library adds load to HTMLElement prototype.
  * This interface acts as a wrapper for Typescript compiler.
  */
-interface PerspectiveViewerElement {
+interface PerspectiveViewerElement extends HTMLElement {
   load: (table: Table) => void,
 }
 
@@ -49,6 +49,13 @@ class Graph extends Component<IProps, {}> {
 
       // Add more Perspective configurations here.
       elem.load(this.table);
+
+      elem.setAttribute('view','xy_scatter');
+      elem.setAttribute('column-pivots','[stock]');
+      elem.setAttribute('row-pivots','[timestrap]');
+      elem.setAttribute('column','top_ask_price');
+      elem.setAttribute('row','top_bid_price');
+      elem.setAttribute('aggregates', '{"stock":"distinct count","top_ask_price": "avg","top_bid_price":"avg","timestrap":"distinct count"}');
     }
   }
 
